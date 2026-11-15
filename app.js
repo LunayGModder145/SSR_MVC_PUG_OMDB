@@ -11,6 +11,7 @@ const productsRoutes = require("./routes/products.routes");
 const productsWebRoutes = require("./routes/products.web.routes");
 
 app.use(express.json()); // Habilito recepción de JSON en servidor
+app.use(express.urlencoded({ extended: true })); // Clave para leer datos del formulario POST
 app.use(express.static('public')); // Para servir archivos estáticos del front CSS, JS, assets
 
 
@@ -23,6 +24,10 @@ app.get('/', (req, res) => {
 app.use('/api/products',productsRoutes);
 // WEB
 app.use('/products',productsWebRoutes);
+app.use('/', moviesRoutes);
+
+// Importar rutas de películas
+const moviesRoutes = require("./routes/movies.routes");
 
 // Rutas web ejemplo
 app.get('/first_template', function(req, res){
@@ -40,8 +45,6 @@ app.get('/dynamic_view', function(req, res){
      url:"https://thebridge.tech/"
   });
 });
-
-
 
 
 app.listen(port, () => {
